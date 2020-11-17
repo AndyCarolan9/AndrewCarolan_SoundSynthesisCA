@@ -11,12 +11,12 @@ ksmps 	= 	32
 nchnls 	= 	2
 0dbfs	=	1 
 
-instr 2SineWaves
+instr TEST
     kfreq chnget "frequency"
-    kamp chnget "amplitude"
+    iamp chnget "amplitude"
 
     ibasefrq = cpspch(kfreq)
-    ibaseamp = ampdbfs(kamp)
+    ibaseamp = iamp
 
     aOsc1   poscil  ibaseamp, ibasefrq
     aOsc2   poscil  ibaseamp/2, ibasefrq*2
@@ -29,6 +29,6 @@ endin
 
 </CsInstruments>
 <CsScore>
-i"2SineWaves" 0 [3600*12]
+i"TEST" 0 [3600*12]
 </CsScore>
 </CsoundSynthesizer>
