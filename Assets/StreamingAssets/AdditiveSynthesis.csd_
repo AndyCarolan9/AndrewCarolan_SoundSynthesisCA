@@ -12,14 +12,11 @@ nchnls 	= 	2
 0dbfs	=	1 
 
 instr TEST
-    kfreq chnget "frequency"
+    ifreq chnget "frequency"
     iamp chnget "amplitude"
 
-    ibasefrq = cpspch(kfreq)
-    ibaseamp = iamp
-
-    aOsc1   poscil  ibaseamp, ibasefrq
-    aOsc2   poscil  ibaseamp/2, ibasefrq*2
+    aOsc1   poscil  iamp, ifreq
+    aOsc2   poscil  iamp/2, ifreq*2
 
     aOut = aOsc1 + aOsc2
 

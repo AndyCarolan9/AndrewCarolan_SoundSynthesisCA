@@ -305,9 +305,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1549546119}
-  - component: {fileID: 1549546118}
   - component: {fileID: 1549546117}
   - component: {fileID: 1549546116}
+  - component: {fileID: 1549546118}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a4a9c17c07e1543a8b25fcc840af09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  csoundFile: ProcessAudio.csd
+  csoundFile: AdditiveSynthesis.csd
   logCsoundOutput: 1
   mute: 0
   processClipAudio: 0
@@ -439,8 +439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75dcc43fc74437147a2fa9189f2cb643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amp: 300
-  frequency: 300
+  amp: 5
+  frequency: 20
 --- !u!4 &1549546119
 Transform:
   m_ObjectHideFlags: 0
