@@ -12,11 +12,11 @@ nchnls 	= 	2
 0dbfs	=	1 
 
 instr TEST
-    ifreq chnget "frequency"
-    iamp chnget "amplitude"
+    kfreq chnget "frequency"
+    kamp chnget "amplitude"
 
-    aOsc1   poscil  iamp, ifreq
-    aOsc2   poscil  iamp/2, ifreq*2
+    aOsc1   poscil  kamp, kfreq
+    aOsc2   poscil  kamp/2, kfreq*2
 
     aOut = aOsc1 + aOsc2
 
