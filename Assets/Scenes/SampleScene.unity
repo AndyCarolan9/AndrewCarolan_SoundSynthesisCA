@@ -958,7 +958,7 @@ GameObject:
   - component: {fileID: 533989832}
   - component: {fileID: 533989831}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Line Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_RaycastTarget: 1
   gridSize: {x: 512, y: 6}
   points: []
-  thickness: 10
+  thickness: 2
 --- !u!222 &533989832
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3932,18 +3932,9 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  freqBand: []
-  freqBand_Images:
-  - {fileID: 514524165}
-  - {fileID: 1011578696}
-  - {fileID: 608702111}
-  - {fileID: 322157167}
-  - {fileID: 333311313}
-  - {fileID: 1008524235}
-  - {fileID: 1619898621}
-  - {fileID: 314237183}
   startScale: 0.1
   scaleMultiplier: 0.1
+  lineRenderer: {fileID: 533989831}
 --- !u!114 &1760643328
 MonoBehaviour:
   m_ObjectHideFlags: 0

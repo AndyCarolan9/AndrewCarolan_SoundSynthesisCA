@@ -13,19 +13,20 @@ public class GenerateWaveScript : MonoBehaviour
 
     public float[] samples = new float[512];
 
-    public float[] freqBand;
-
-    public Image[] freqBand_Images;
-
     public float startScale = 1;
     public float scaleMultiplier = 10;
+
+    List<Vector2> points = new List<Vector2>();
+
+    public UILineRenderer lineRenderer;
+
+    float timeBetweenUpdate = 0.15f;
+    float lastUpdateTime = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         source = GetComponent<AudioSource>();
-
-        freqBand = new float[freqBand_Images.Length];
     }
 
     // Update is called once per frame
@@ -35,7 +36,16 @@ public class GenerateWaveScript : MonoBehaviour
 
         //MakeFrequencyBands();
 
-        GetClipData();
+
+        if(timeBetweenUpdate + lastUpdateTime <= Time.time || lastUpdateTime == 0)
+        {
+            lastUpdateTime = Time.time;
+            GetClipData();
+            CreatePointsList();
+
+            lineRenderer.points = points;
+            lineRenderer.SetVerticesDirty();
+        }        
     }
 
     void GetClipData()
@@ -43,44 +53,13 @@ public class GenerateWaveScript : MonoBehaviour
         source.GetOutputData(samples, 1);
     }
 
-    void GetSpectrumData()
+    void CreatePointsList()
     {
-        source.GetSpectrumData(samples, 0, FFTWindow.Blackman);
-    }
+        points.Clear();
 
-    void MakeFrequencyBands()
-    {
-        int count = 0;
-
-        for(int i = 0; i < freqBand.Length; i++)
+        for(int i = 0; i < samples.Length; i++)
         {
-            float average = 0;
-            int sampleCount = (int)Mathf.Pow(2, i) * 2;
-
-            if(i == 7)
-            {
-                sampleCount += 2;
-            }
-
-            for(int j = 0; j < sampleCount; j++)
-            {
-                average += samples[count] * (count + 1);
-                count++;
-            }
-
-            average /= count;
-
-            freqBand[i] = average * 10;
-        }
-
-        for (int k = 0; k < freqBand_Images.Length; k++)
-        {
-            freqBand_Images[k].transform.localScale = new Vector3(
-                freqBand_Images[k].transform.localScale.x,
-                (freqBand[k] * scaleMultiplier) + startScale,
-                freqBand_Images[k].transform.localScale.x);
-
-            Debug.Log(freqBand_Images[k].transform.localScale);
+            points.Add(new Vector2(i - 256, samples[i]));
         }
     }
 }
