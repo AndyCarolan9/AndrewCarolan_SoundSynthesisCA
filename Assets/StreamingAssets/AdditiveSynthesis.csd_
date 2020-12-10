@@ -12,7 +12,7 @@ nchnls 	= 	2
 0dbfs	=	1 
 
 instr TEST
-    kfreq chnget "frequency1"
+    kfreq chnget "frequency"
     kamp chnget "amplitude"
 
     aOsc1   poscil  kamp, kfreq
