@@ -18,10 +18,22 @@ public class GenerateTargetWave : MonoBehaviour
 
     int lastPointSet = 0;
 
+    bool captureWave = false;
+
     // Start is called before the first frame update
     void Start()
     {
         source = GetComponent<AudioSource>();
+    }
+
+    private void OnEnable()
+    {
+        EventSystem.current.OnStartWaveCapture += StartWaveCapture;
+    }
+
+    private void OnDisable()
+    {
+        EventSystem.current.OnStartWaveCapture -= StartWaveCapture;
     }
 
     // Update is called once per frame
@@ -33,6 +45,8 @@ public class GenerateTargetWave : MonoBehaviour
 
             if (index >= max)
             {
+                StartPlayerInput();
+
                 lineRenderer.points = pointLists[lastPointSet];
                 lineRenderer.SetVerticesDirty();
 
@@ -45,17 +59,20 @@ public class GenerateTargetWave : MonoBehaviour
             }
             else
             {
-                float[] newSamples = new float[512];
+                if(captureWave)
+                {
+                    float[] newSamples = new float[512];
 
-                source.GetOutputData(newSamples, 1);
-                var points = CreatePointsList(newSamples);
+                    source.GetOutputData(newSamples, 1);
+                    var points = CreatePointsList(newSamples);
 
-                pointLists.Add(points);
+                    pointLists.Add(points);
 
-                lineRenderer.points = points;
-                lineRenderer.SetVerticesDirty();
+                    lineRenderer.points = points;
+                    lineRenderer.SetVerticesDirty();
 
-                index++;
+                    index++;
+                }
             }
         }
     }
@@ -70,5 +87,17 @@ public class GenerateTargetWave : MonoBehaviour
         }
 
         return points;
+    }
+
+    void StartWaveCapture()
+    {
+        captureWave = true;
+        pointLists.Clear();
+    }
+
+    void StartPlayerInput()
+    {
+        captureWave = false;
+        EventSystem.current.StartPlayerInput();
     }
 }
