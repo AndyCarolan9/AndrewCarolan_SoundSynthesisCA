@@ -11,10 +11,7 @@ public class GenerateWaveScript : MonoBehaviour
 {
     AudioSource source;
 
-    public float[] samples = new float[512];
-
-    public float startScale = 1;
-    public float scaleMultiplier = 10;
+    float[] samples = new float[512];
 
     List<Vector2> points = new List<Vector2>();
 

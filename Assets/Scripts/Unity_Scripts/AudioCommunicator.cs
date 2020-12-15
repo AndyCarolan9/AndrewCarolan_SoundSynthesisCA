@@ -13,6 +13,9 @@ public class AudioCommunicator : MonoBehaviour
     public Slider ampSlider;
     public Text ampMinValue;
     public Text ampMaxValue;
+
+    public Text freqValue;
+    public Text ampValue;
     #endregion
 
     private CsoundUnity csound;
@@ -33,5 +36,8 @@ public class AudioCommunicator : MonoBehaviour
     {
         csound.setChannel("frequency", frequencySlider.value);
         csound.setChannel("amplitude", ampSlider.value);
+
+        freqValue.text = frequencySlider.value.ToString();
+        ampValue.text = ampSlider.value.ToString();
     }
 }
