@@ -26,7 +26,7 @@ public class UILineRenderer : Graphic
         unitWidth = width / (float)gridSize.x;
         unitHeight = height / (float)gridSize.y;
 
-        if(points.Count < 2)
+        if(points.Count < 2 || points == null)
         {
             return;
         }

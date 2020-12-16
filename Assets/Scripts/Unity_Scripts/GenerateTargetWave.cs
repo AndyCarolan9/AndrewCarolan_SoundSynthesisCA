@@ -8,7 +8,7 @@ public class GenerateTargetWave : MonoBehaviour
 
     List<List<Vector2>> pointLists = new List<List<Vector2>>(); // the output data of the generated sound over a certain time
 
-    float timeBetweenUpdate = 0.15f;
+    float timeBetweenUpdate = 0.2f;
     float lastUpdateTime = 0;
 
     public UILineRenderer lineRenderer;
@@ -93,6 +93,8 @@ public class GenerateTargetWave : MonoBehaviour
     {
         captureWave = true;
         pointLists.Clear();
+        index = 0;
+        lastPointSet = 0;
     }
 
     void StartPlayerInput()

@@ -15,6 +15,7 @@ public class EventSystem : MonoBehaviour
     public event Action OnGenerateNewWave; // calls function to create new random wave
     public event Action OnStartWaveCapture; // starts the playing and capture of target wave data
     public event Action OnStartPlayerInput; // Allow the player to input data
+    public event Action OnSolvedWave;
 
     public void GenerateNewWave()
     {
@@ -29,5 +30,10 @@ public class EventSystem : MonoBehaviour
     public void StartPlayerInput()
     {
         OnStartPlayerInput?.Invoke();
+    }
+
+    public void SolvedWave()
+    {
+        OnSolvedWave?.Invoke();
     }
 }

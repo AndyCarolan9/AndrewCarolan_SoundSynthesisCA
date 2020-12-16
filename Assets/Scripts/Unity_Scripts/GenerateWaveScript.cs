@@ -17,7 +17,7 @@ public class GenerateWaveScript : MonoBehaviour
 
     public UILineRenderer lineRenderer;
 
-    float timeBetweenUpdate = 0.15f;
+    float timeBetweenUpdate = 0.2f;
     float lastUpdateTime = 0;
 
     // Start is called before the first frame update
@@ -26,13 +26,17 @@ public class GenerateWaveScript : MonoBehaviour
         source = GetComponent<AudioSource>();
     }
 
+    private void OnEnable()
+    {
+        EventSystem.current.OnSolvedWave += DisableLineRenderer;
+    }
+
     // Update is called once per frame
     void Update()
     {
         //GetSpectrumData();
 
         //MakeFrequencyBands();
-
 
         if(timeBetweenUpdate + lastUpdateTime <= Time.time || lastUpdateTime == 0)
         {
@@ -58,5 +62,11 @@ public class GenerateWaveScript : MonoBehaviour
         {
             points.Add(new Vector2(i - 256, samples[i]));
         }
+    }
+
+    void DisableLineRenderer()
+    {
+        lineRenderer.points = null;
+        EventSystem.current.GenerateNewWave();
     }
 }

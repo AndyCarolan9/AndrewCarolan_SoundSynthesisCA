@@ -19,12 +19,12 @@ public class AudioCommunicator : MonoBehaviour
     #endregion
 
     #region Random Wave Variables
-    public int randFreq;
-    public int randAmp;
-    public int soundToPlay;
+    int randFreq;
+    float randAmp;
+    int soundToPlay;
     #endregion
 
-    public bool allowInput = false;
+    bool allowInput = false;
 
     private CsoundUnity csound;
 
@@ -61,6 +61,8 @@ public class AudioCommunicator : MonoBehaviour
 
         if(allowInput)
         {
+            CheckValues();
+
             csound.setChannel("frequency", frequencySlider.value);
             csound.setChannel("amplitude", ampSlider.value);
 
@@ -79,8 +81,8 @@ public class AudioCommunicator : MonoBehaviour
 
     void SetupRandomVariables()
     {
-        randFreq = (int)Random.Range(frequencySlider.minValue, frequencySlider.maxValue);
-        randAmp = (int)Random.Range(ampSlider.minValue, ampSlider.maxValue);
+        randFreq = (int)Random.Range(frequencySlider.minValue + 50, frequencySlider.maxValue); // values under fifty do not draw a good line
+        randAmp = Random.Range(ampSlider.minValue, ampSlider.maxValue);
         soundToPlay = Random.Range(0, 2); // set to 2 because it is an exclusive value. Random should return 0 or 1
 
         EventSystem.current.StartWaveCapture(); // capture the wave now that it is made
@@ -91,5 +93,17 @@ public class AudioCommunicator : MonoBehaviour
         frequencySlider.enabled = true; // set to false in editor 
         ampSlider.enabled = true;
         allowInput = true;
+    }
+
+    void CheckValues()
+    {
+        if (frequencySlider.value >= randFreq - 3 && frequencySlider.value <= randFreq + 3 && ampSlider.value >= randAmp - 0.5f && ampSlider.value <= randAmp + 0.5f)
+        {
+            frequencySlider.enabled = false; // set to false in editor 
+            ampSlider.enabled = false;
+            allowInput = false;
+
+            EventSystem.current.SolvedWave();
+        }
     }
 }
