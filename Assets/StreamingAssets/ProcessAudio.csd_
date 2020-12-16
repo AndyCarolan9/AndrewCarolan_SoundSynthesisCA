@@ -16,7 +16,7 @@ instr TEST
 a1 inch 1
 a2 inch 2
 aComb comb a1, 2, .2
-;outs oscil:a(1, 200), oscil:a(1, 200)
+outs oscil:a(1, 200), oscil:a(1, 200)
 outs aComb, aComb
 endin
 
