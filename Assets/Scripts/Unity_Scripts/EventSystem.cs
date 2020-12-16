@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Simple event system to communicate event updates in the game between objects 
+/// https://www.youtube.com/watch?v=gx0Lt4tCDE0&t=183s follows the structure of the linked video
+/// </summary>
 public class EventSystem : MonoBehaviour
 {
     public static EventSystem current;

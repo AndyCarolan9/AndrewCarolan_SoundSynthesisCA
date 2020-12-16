@@ -12,7 +12,8 @@ nchnls 	= 	2
 0dbfs	=	1 
 
 instr HANDLE
-    kparam chnget "sound"
+; parameters that change in Unity
+    kparam chnget "sound" ; which wave type to play
     kfreq chnget "frequency"
     kamp chnget "amplitude"
 
@@ -37,6 +38,7 @@ instr HANDLE
 
 endin
 
+;Initially tried three different instruments but could not change between them
 instr SIXWAVE
     kfreq chnget "frequency"
     kamp chnget "amplitude"

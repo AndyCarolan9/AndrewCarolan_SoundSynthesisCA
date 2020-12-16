@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// https://www.youtube.com/watch?v=--LB7URk60A&t=399s
+/// Creates a UI line renderer that draws lines between points
+/// </summary>
 public class UILineRenderer : Graphic
 {
     public Vector2Int gridSize;

@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-/*
- * https://www.youtube.com/watch?v=0KqwmcQqg0s&list=PL3POsQzaCw53p2tA6AWf7_AWgplskR0Vo&index=3
- */
+/// <summary>
+/// Generates the wave created by the player
+/// </summary>
 public class GenerateWaveScript : MonoBehaviour
 {
     AudioSource source;
@@ -26,22 +26,29 @@ public class GenerateWaveScript : MonoBehaviour
         source = GetComponent<AudioSource>();
     }
 
+    /// <summary>
+    /// Attach to events
+    /// </summary>
     private void OnEnable()
     {
         EventSystem.current.OnSolvedWave += DisableLineRenderer;
     }
 
+    /// <summary>
+    /// Detach from event
+    /// </summary>
+    private void OnDisable()
+    {
+        EventSystem.current.OnSolvedWave -= DisableLineRenderer;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        //GetSpectrumData();
-
-        //MakeFrequencyBands();
-
         if(timeBetweenUpdate + lastUpdateTime <= Time.time || lastUpdateTime == 0)
         {
             lastUpdateTime = Time.time;
-            GetClipData();
+            source.GetOutputData(samples, 1);
             CreatePointsList();
 
             lineRenderer.points = points;
@@ -49,11 +56,12 @@ public class GenerateWaveScript : MonoBehaviour
         }        
     }
 
-    void GetClipData()
-    {
-        source.GetOutputData(samples, 1);
-    }
-
+    /// <summary>
+    /// Turns a float array into a list of vector 2.
+    /// 256 is taken away from the index because 0 in the line renderer is in the centre. Used to span the line across the screen
+    /// </summary>
+    /// <param name="samples">output data of the audio</param>
+    /// <returns></returns>
     void CreatePointsList()
     {
         points.Clear();
@@ -64,6 +72,9 @@ public class GenerateWaveScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the points of the line renderer to be null to stop it drawing
+    /// </summary>
     void DisableLineRenderer()
     {
         lineRenderer.points = null;
